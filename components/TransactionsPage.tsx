@@ -505,14 +505,14 @@ export const TransactionsPage: React.FC<TransactionsPageProps> = ({ transactions
           <table className="w-full table-fixed border-collapse">
             <thead>
               <tr className="text-left border-b border-slate-200">
-                <th className="pb-3 pl-4 w-10 align-top pt-6">
+                <th className="pb-3 pl-4 w-10 align-top pt-6 sticky left-0 bg-white z-20">
                   <label className="flex items-center justify-center w-4 h-4 border border-slate-300 rounded bg-white cursor-pointer hover:border-slate-500 relative">
                     <input type="checkbox" className="peer appearance-none w-full h-full" checked={processedTransactions.length > 0 && selectedIds.size === processedTransactions.length} onChange={() => toggleSelectAll(processedTransactions)} />
                     <Icon name="check" className="text-slate-800 text-xs absolute hidden peer-checked:block" />
                   </label>
                 </th>
                 {visibleColumns.map(col => (
-                  <th key={col.id} className="pb-3 px-2 w-32">
+                  <th key={col.id} className="pb-3 px-2 w-32 align-top pt-6">
                     <div className="flex flex-col gap-1.5">
                       <div className="flex items-center gap-1 cursor-pointer group" onClick={() => handleSort(col.id)}>
                         <span className="font-medium text-slate-400 text-[11px] uppercase tracking-wider group-hover:text-slate-700 truncate">{col.label}</span>
@@ -528,7 +528,7 @@ export const TransactionsPage: React.FC<TransactionsPageProps> = ({ transactions
                     </div>
                   </th>
                 ))}
-                <th className="pb-3 w-20"></th>
+                <th className="pb-3 w-20 sticky right-0 bg-white z-20"></th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50">
