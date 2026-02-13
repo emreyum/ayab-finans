@@ -247,40 +247,40 @@ function App() {
             </div>
 
             {/* Recent Transactions Table */}
-            <div className="bg-white rounded-lg border border-slate-200 overflow-hidden">
-              <div className="px-5 py-4 border-b border-slate-100 flex justify-between items-center">
+            <div className="glass-card rounded-2xl border border-white/40 overflow-hidden">
+              <div className="px-5 py-4 border-b border-white/20 flex justify-between items-center">
                 <h3 className="font-bold text-slate-800 text-sm flex items-center gap-2">
                   <Icon name="history" className="text-slate-400" /> Son İşlemler
                 </h3>
-                <button onClick={() => setActiveTab('transactions')} className="text-[11px] font-bold text-slate-500 hover:text-slate-800 transition-colors uppercase tracking-wider">
-                  Tümünü Gör
+                <button onClick={() => setActiveTab('transactions')} className="text-[10px] font-bold text-slate-500 hover:text-slate-800 transition-colors uppercase tracking-wider">
+                  Tümünü Gör →
                 </button>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-left">
-                  <thead className="bg-slate-50 border-b border-slate-100">
-                    <tr>
+                  <thead>
+                    <tr className="border-b border-white/20">
                       <th className="px-5 py-2.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Tarih</th>
                       <th className="px-5 py-2.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Müvekkil / Grup</th>
                       <th className="px-5 py-2.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider text-right">Tutar</th>
                       <th className="px-5 py-2.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider text-center">Durum</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-50">
+                  <tbody>
                     {recentTransactions.length > 0 ? recentTransactions.map((t) => (
-                      <tr key={t.id} className="hover:bg-slate-50/50 transition-colors group">
+                      <tr key={t.id} className="hover:bg-white/30 transition-colors border-b border-white/10">
                         <td className="px-5 py-3 text-xs text-slate-600 font-medium">{new Date(t.date).toLocaleDateString('tr-TR')}</td>
                         <td className="px-5 py-3">
                           <p className="text-xs font-bold text-slate-800 truncate max-w-[150px]">{t.client || t.group || '-'}</p>
                           <p className="text-[10px] text-slate-400 truncate max-w-[150px]">{t.category}</p>
                         </td>
-                        <td className={`px-5 py-3 text-xs font-bold text-right ${t.type === TransactionType.INCOME ? 'text-slate-700' : 'text-slate-500'
+                        <td className={`px-5 py-3 text-xs font-bold text-right ${t.type === TransactionType.INCOME ? 'text-emerald-600' : 'text-red-400'
                           }`}>
                           {t.type === TransactionType.INCOME || t.type === TransactionType.RECEIVABLE ? '+' : '-'}
                           ₺{t.amount.toLocaleString('tr-TR')}
                         </td>
                         <td className="px-5 py-3 text-center">
-                          <div className={`w-1.5 h-1.5 rounded-full inline-block ${t.status === TransactionStatus.APPROVED ? 'bg-slate-800' : 'bg-slate-400'
+                          <div className={`w-2 h-2 rounded-full inline-block ${t.status === TransactionStatus.APPROVED ? 'bg-emerald-500' : 'bg-amber-400'
                             }`}></div>
                         </td>
                       </tr>
@@ -298,45 +298,45 @@ function App() {
           {/* Side Dashboard Panel (4 columns) */}
           <div className="lg:col-span-4 space-y-6">
             {/* Quick Actions */}
-            <div className="bg-slate-900 rounded-lg p-5 text-white">
-              <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">Hızlı İşlemler</h3>
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-5 text-white shadow-xl">
+              <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4">Hızlı İşlemler</h3>
               <div className="grid grid-cols-2 gap-3">
                 <button
                   onClick={() => { setInitialTxType(TransactionType.INCOME); setIsTxModalOpen(true); }}
-                  className="bg-white/10 hover:bg-white/20 p-3 rounded-lg transition-all flex flex-col items-center gap-2 border border-white/5"
+                  className="bg-white/10 hover:bg-white/20 p-3.5 rounded-xl transition-all flex flex-col items-center gap-2 border border-white/10 backdrop-blur"
                 >
-                  <Icon name="add_circle" className="text-xl" />
+                  <Icon name="add_circle" className="text-xl text-emerald-400" />
                   <span className="text-[10px] font-bold uppercase tracking-wider">Gelir Ekle</span>
                 </button>
                 <button
                   onClick={() => { setInitialTxType(TransactionType.EXPENSE); setIsTxModalOpen(true); }}
-                  className="bg-white/10 hover:bg-white/20 p-3 rounded-lg transition-all flex flex-col items-center gap-2 border border-white/5"
+                  className="bg-white/10 hover:bg-white/20 p-3.5 rounded-xl transition-all flex flex-col items-center gap-2 border border-white/10 backdrop-blur"
                 >
-                  <Icon name="remove_circle" className="text-xl" />
+                  <Icon name="remove_circle" className="text-xl text-red-400" />
                   <span className="text-[10px] font-bold uppercase tracking-wider">Gider Ekle</span>
                 </button>
                 <button
                   onClick={() => setActiveTab('bank')}
-                  className="bg-white/10 hover:bg-white/20 p-3 rounded-lg transition-all flex flex-col items-center gap-2 border border-white/5"
+                  className="bg-white/10 hover:bg-white/20 p-3.5 rounded-xl transition-all flex flex-col items-center gap-2 border border-white/10 backdrop-blur"
                 >
-                  <Icon name="account_balance" className="text-xl" />
+                  <Icon name="account_balance" className="text-xl text-blue-400" />
                   <span className="text-[10px] font-bold uppercase tracking-wider">Bankalar</span>
                 </button>
                 <button
                   onClick={() => setActiveTab('settings')}
-                  className="bg-white/10 hover:bg-white/20 p-3 rounded-lg transition-all flex flex-col items-center gap-2 border border-white/5"
+                  className="bg-white/10 hover:bg-white/20 p-3.5 rounded-xl transition-all flex flex-col items-center gap-2 border border-white/10 backdrop-blur"
                 >
-                  <Icon name="settings" className="text-xl" />
+                  <Icon name="settings" className="text-xl text-purple-400" />
                   <span className="text-[10px] font-bold uppercase tracking-wider">Ayarlar</span>
                 </button>
               </div>
             </div>
 
             {/* Information Card */}
-            <div className="bg-white rounded-lg border border-slate-200 p-5">
+            <div className="glass-card rounded-2xl border border-white/40 p-5">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center text-slate-400">
-                  <Icon name="info" />
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center shadow">
+                  <Icon name="info" className="text-sm" />
                 </div>
                 <div>
                   <h4 className="text-xs font-bold text-slate-800">Sistem Durumu</h4>
@@ -352,8 +352,8 @@ function App() {
                   <span className="text-slate-500">Müvekkil Sayısı</span>
                   <span className="font-bold text-slate-800">{[...new Set(allTransactions.map(t => t.client))].filter(Boolean).length}</span>
                 </div>
-                <div className="w-full bg-slate-50 rounded-full h-1.5">
-                  <div className="bg-slate-800 h-1.5 rounded-full w-4/5"></div>
+                <div className="w-full bg-white/30 rounded-full h-1.5 mt-2">
+                  <div className="bg-gradient-to-r from-slate-700 to-slate-900 h-1.5 rounded-full w-4/5"></div>
                 </div>
               </div>
             </div>
